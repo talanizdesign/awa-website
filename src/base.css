@@ -102,6 +102,7 @@ a { color: var(--p700); }
 /* Single-message pages (/confirm) */
 .solo { min-height: 100svh; display: flex; flex-direction: column; background: var(--p900); color: #fff; }
 .solo .logo { color: #fff; }
+.solo :focus-visible { outline-color: #fff; }
 .solo__top { padding-block: 24px; }
 .solo__main { flex: 1; display: flex; align-items: center; padding-bottom: 12vh; }
 .solo__msg > section { display: none; }

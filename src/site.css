@@ -8,6 +8,7 @@ body { overflow-x: hidden; }
 .top__link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; font-weight: 600; color: #fff; text-decoration: none; transition: color .6s ease, background-color .2s ease; }
 .top__link:hover { background: rgba(255,255,255,.12); }
 .hero.is-white .top .logo, .hero.is-white .top__link { color: var(--p900); }
+.hero:not(.is-white) :focus-visible { outline-color: #fff; }  /* navy hero: white focus ring */
 .hero.is-white .top__link:hover { background: var(--p100); }
 
 /* ---------- Hero: the meadow grows ----------
@@ -63,7 +64,7 @@ body { overflow-x: hidden; }
 .hero.is-white .hero__copy .lead { color: var(--n700); }
 .hero.is-white .hero__hint { color: var(--n700); text-shadow: none; }
 .hero.is-white .glass-join .join__row { background: rgba(31,64,128,.07); }
-.hero.is-white .glass-join .join__row:focus-within { background: rgba(31,64,128,.11); }
+.hero.is-white .glass-join .join__row:focus-within { background: rgba(31,64,128,.11); box-shadow: 0 0 0 1px rgba(31,64,128,.6); }
 .hero.is-white .glass-join input { color: var(--n900); }
 .hero.is-white .glass-join input::placeholder { color: var(--n700); }
 .hero.is-white .glass-join .btn--primary { background: var(--p900); color: #fff; }
@@ -75,7 +76,7 @@ body { overflow-x: hidden; }
    focus is shown by the capsule filling in. */
 .glass-join .join__row { flex-wrap: nowrap; gap: 6px; padding: 6px; border-radius: 999px; width: 100%; border: 0;
   background: rgba(255,255,255,.12); -webkit-backdrop-filter: blur(16px) saturate(150%); backdrop-filter: blur(16px) saturate(150%); }
-.glass-join .join__row:focus-within { background: rgba(255,255,255,.22); }
+.glass-join .join__row:focus-within { background: rgba(255,255,255,.22); box-shadow: 0 0 0 1px rgba(255,255,255,.75); }  /* thin ring only while typing */
 .glass-join input { flex: 1 1 auto; min-width: 0; border: 0; background: transparent; color: #fff; padding-left: 1rem; }
 .glass-join input::placeholder { color: rgba(255,255,255,.8); }
 .glass-join input:focus-visible { outline: none; }
@@ -217,6 +218,7 @@ body { overflow-x: hidden; }
 .foot a { color: var(--p300); }
 .foot a:hover { color: #fff; }
 .foot :focus-visible { outline-color: #fff; }
+.foot a { display: inline-flex; align-items: center; min-height: 24px; }  /* WCAG 2.2 target size */
 .foot__base { display: grid; gap: 6px; justify-items: end; text-align: right; }
 .foot__base nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 18px; order: -1; }
 .foot__base a { color: rgba(255,255,255,.85); }

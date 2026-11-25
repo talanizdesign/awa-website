@@ -87,7 +87,7 @@ FOOT = f'''<footer class="foot">
     <div class="foot__me">
       <h2 class="foot__h">Hi, I'm Teresa.</h2>
       <p>{TERESA}</p>
-      <a href="https://books.apple.com/us/book/emotion-driven-innovation/id6478436705" rel="noopener" target="_blank">About the book</a>
+      <a href="https://books.apple.com/us/book/emotion-driven-innovation/id6478436705" rel="noopener" target="_blank">About the book<span class="sr"> (opens in a new tab)</span></a>
     </div>
     <div class="foot__base">
       <span>© 2026 Teresa Alaniz</span>
