@@ -23,3 +23,14 @@ Fonts: Bricolage Grotesque, self-hosted in `public/fonts` (SIL Open Font License
 
 - Build command: none
 - Build output directory: `public`
+
+## Waiting list (Supabase + Resend)
+
+- `supabase/waitlist.sql`: the table (private `waitlist` schema, not reachable through the public API)
+  and the nightly job that deletes unconfirmed addresses after 7 days. Run once in the SQL Editor.
+- `supabase/functions/waitlist/index.ts`: the Edge Function the form talks to. It saves the address
+  and sends the confirmation email through Resend. `/confirm/?t=…` confirms it.
+- Secret in Supabase → Edge Functions → Secrets: `RESEND_API_KEY` (Resend key with sending access only).
+  Optional `MAIL_FROM` (default `Awa <hello@getawa.app>`).
+- Deploy: `npx supabase@latest functions deploy waitlist --project-ref aqodeoaxcuhivxesfxbb --no-verify-jwt --use-api`
+- See the list: `select email, created_at, confirmed_at from waitlist.people order by created_at;`

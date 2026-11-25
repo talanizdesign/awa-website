@@ -12,7 +12,7 @@ HERE = Path(__file__).parent
 DEV = '--dev' in sys.argv
 OUT = HERE / ('.dev' if DEV else 'public')
 
-LOGO = '''<svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true"><g stroke="#D6CFC7" stroke-width="1.1" stroke-linecap="round"><path d="M16.00 11.00L16.00 5.50"/><path d="M18.50 11.67L21.25 6.91"/><path d="M20.33 13.50L25.09 10.75"/><path d="M21.00 16.00L26.50 16.00"/><path d="M20.33 18.50L25.09 21.25"/><path d="M18.50 20.33L21.25 25.09"/><path d="M16.00 21.00L16.00 26.50"/><path d="M13.50 20.33L10.75 25.09"/><path d="M11.67 18.50L6.91 21.25"/><path d="M11.00 16.00L5.50 16.00"/><path d="M11.67 13.50L6.91 10.75"/><path d="M13.50 11.67L10.75 6.91"/></g><circle cx="16.00" cy="3.00" r="2.6" fill="#72B172"/><circle cx="22.50" cy="4.74" r="2.1" fill="#FF9E7D"/><circle cx="27.26" cy="9.50" r="2.1" fill="#5B7D60"/><circle cx="29.00" cy="16.00" r="2.6" fill="#65A0FE"/><circle cx="27.26" cy="22.50" r="2.1" fill="#E57E73"/><circle cx="22.50" cy="27.26" r="2.1" fill="#72B172"/><circle cx="16.00" cy="29.00" r="2.6" fill="#FF9E7D"/><circle cx="9.50" cy="27.26" r="2.1" fill="#5B7D60"/><circle cx="4.74" cy="22.50" r="2.1" fill="#E57E73"/><circle cx="3.00" cy="16.00" r="2.6" fill="#72B172"/><circle cx="4.74" cy="9.50" r="2.1" fill="#65A0FE"/><circle cx="9.50" cy="4.74" r="2.1" fill="#FF9E7D"/></svg><span class="logo__word">awa</span>'''
+LOGO = '''<svg class="logo__mark" viewBox="207 59 610 610" aria-hidden="true"><g stroke="#D6CFC7" stroke-linecap="round"><path d="M512 247.2V97.2" stroke-width="3"/><path d="M559.15 282.35L629.875 159.875" stroke-width="3.45"/><path d="M593.65 316.85L743.035 230.6" stroke-width="3.45"/><path d="M606.3 364H729.3" stroke-width="3"/><path d="M593.65 411.15L743.035 497.4" stroke-width="3.45"/><path d="M559.15 445.65L629.875 568.125" stroke-width="3.45"/><path d="M512 458.3V608.3" stroke-width="3"/><path d="M464.85 445.65L394.125 568.125" stroke-width="3.45"/><path d="M430.35 411.15L280.965 497.4" stroke-width="3.45"/><path d="M399.25 364H276.25" stroke-width="3"/><path d="M430.35 316.85L280.965 230.6" stroke-width="3.45"/><path d="M464.85 282.35L394.125 159.875" stroke-width="3.45"/></g><path d="M512 129.4C529.784 129.4 544.2 114.984 544.2 97.2C544.2 79.4164 529.784 65 512 65C494.216 65 479.8 79.4164 479.8 97.2C479.8 114.984 494.216 129.4 512 129.4Z" fill="#72B172"/><path d="M629.875 185.175C643.848 185.175 655.175 173.848 655.175 159.875C655.175 145.902 643.848 134.575 629.875 134.575C615.902 134.575 604.575 145.902 604.575 159.875C604.575 173.848 615.902 185.175 629.875 185.175Z" fill="#FF9E7D"/><path d="M743.035 255.9C757.008 255.9 768.335 244.573 768.335 230.6C768.335 216.627 757.008 205.3 743.035 205.3C729.062 205.3 717.735 216.627 717.735 230.6C717.735 244.573 729.062 255.9 743.035 255.9Z" fill="#5B7D60"/><path d="M747.75 396.2C765.534 396.2 779.95 381.784 779.95 364C779.95 346.216 765.534 331.8 747.75 331.8C729.966 331.8 715.55 346.216 715.55 364C715.55 381.784 729.966 396.2 747.75 396.2Z" fill="#65A0FE"/><path d="M743.035 522.7C757.008 522.7 768.335 511.373 768.335 497.4C768.335 483.427 757.008 472.1 743.035 472.1C729.062 472.1 717.735 483.427 717.735 497.4C717.735 511.373 729.062 522.7 743.035 522.7Z" fill="#E67E73"/><path d="M629.875 593.425C643.848 593.425 655.175 582.098 655.175 568.125C655.175 554.152 643.848 542.825 629.875 542.825C615.902 542.825 604.575 554.152 604.575 568.125C604.575 582.098 615.902 593.425 629.875 593.425Z" fill="#72B172"/><path d="M512 663C529.784 663 544.2 648.584 544.2 630.8C544.2 613.016 529.784 598.6 512 598.6C494.216 598.6 479.8 613.016 479.8 630.8C479.8 648.584 494.216 663 512 663Z" fill="#FF9E7D"/><path d="M394.125 593.425C408.098 593.425 419.425 582.098 419.425 568.125C419.425 554.152 408.098 542.825 394.125 542.825C380.152 542.825 368.825 554.152 368.825 568.125C368.825 582.098 380.152 593.425 394.125 593.425Z" fill="#5B7D60"/><path d="M280.965 522.7C294.938 522.7 306.265 511.373 306.265 497.4C306.265 483.427 294.938 472.1 280.965 472.1C266.992 472.1 255.665 483.427 255.665 497.4C255.665 511.373 266.992 522.7 280.965 522.7Z" fill="#E67E73"/><path d="M276.25 396.2C294.034 396.2 308.45 381.784 308.45 364C308.45 346.216 294.034 331.8 276.25 331.8C258.466 331.8 244.05 346.216 244.05 364C244.05 381.784 258.466 396.2 276.25 396.2Z" fill="#72B172"/><path d="M280.965 255.9C294.938 255.9 306.265 244.573 306.265 230.6C306.265 216.627 294.938 205.3 280.965 205.3C266.992 205.3 255.665 216.627 255.665 230.6C255.665 244.573 266.992 255.9 280.965 255.9Z" fill="#65A0FE"/><path d="M394.125 185.175C408.098 185.175 419.425 173.848 419.425 159.875C419.425 145.902 408.098 134.575 394.125 134.575C380.152 134.575 368.825 145.902 368.825 159.875C368.825 173.848 380.152 185.175 394.125 185.175Z" fill="#FF9E7D"/></svg><span class="logo__word">awa</span>'''
 
 TITLE = 'Awa: How apps make you feel'
 DESC = 'How do your apps make you feel? Awa gives you a simple way to notice. Join the waiting list for the iPhone app.'
@@ -53,6 +53,7 @@ def join(i, label='Join'):
     <input id="email-{i}" type="email" name="email" placeholder="Your email" autocomplete="email" aria-describedby="err-{i}">
     <button class="btn btn--primary" type="submit">{label}</button>
   </div>
+  <div class="join__hp" aria-hidden="true"><label for="website-{i}">Leave this empty</label><input id="website-{i}" type="text" name="website" tabindex="-1" autocomplete="off"></div>
   <p class="join__err" id="err-{i}" role="alert">Enter a valid email address.</p>
   <div class="join__ok" tabindex="-1" role="status"><b>Check your inbox.</b>We sent you an email. Confirm it to join the list.</div>
 </form>'''
@@ -184,7 +185,7 @@ def page():
     <div class="row" aria-labelledby="priv-h"><h2 class="st" id="priv-h">What you log is yours.</h2>{PRIV.replace('<li><svg', '<li><span class="priv__ic"><svg').replace('</svg><span>', '</svg></span><span>')}</div>
   </section>
 
-  <section class="wrap sec" style="padding-top:0" aria-labelledby="q-h">
+  <section class="wrap sec sec--flush" aria-labelledby="q-h">
     <div class="centered"><h2 class="h2" id="q-h">Questions</h2></div>
     <div class="qa">{FAQ}</div>
   </section>
@@ -192,7 +193,7 @@ def page():
 
   <section class="final" id="join-end" aria-labelledby="f-h">
     <canvas class="field-canvas" aria-hidden="true"></canvas>
-    <div class="wrap"><div class="centered final__card"><h2 class="h2" id="f-h">Be the first to know.</h2>{join('end')}</div></div>
+    <div class="wrap"><div class="centered final__card"><h2 class="h2" id="f-h">Be the first to know.</h2>{join('final')}</div></div>
   </section>
 </main>
 ''' + FOOT + f'''
@@ -201,8 +202,42 @@ def page():
 </html>'''
 
 
+def confirm_page():
+    # The link in the confirmation email opens this page, which confirms through the function.
+    # (A direct link to the function could be "clicked" by email scanners and confirm on its own.)
+    return f'''<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Awa: Confirm your email</title>
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#1F4080">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body class="solo">
+<header class="solo__top wrap"><a class="logo" href="/" aria-label="Awa, home">{LOGO}</a></header>
+<main class="solo__main wrap">
+  <div class="solo__msg" data-state="wait" aria-live="polite">
+    <section data-for="wait"><h1 class="solo__h">Confirming your email</h1></section>
+    <section data-for="ok"><h1 class="solo__h">You're on the list.</h1><p class="solo__p">We'll email you once, when Awa is out.</p><a class="btn solo__btn" href="/">Back to Awa</a></section>
+    <section data-for="link"><h1 class="solo__h">This link didn't work.</h1><p class="solo__p">It may be older than 7 days. Join again on the home page and we'll send you a new one.</p><a class="btn solo__btn" href="/#join-end">Join again</a></section>
+    <section data-for="net"><h1 class="solo__h">Something went wrong.</h1><p class="solo__p">Check your connection and reload this page.</p></section>
+  </div>
+</main>
+<script src="/confirm.js" defer></script>
+</body>
+</html>'''
+
+
 OUT.mkdir(exist_ok=True)
 (OUT / 'index.html').write_text(page())
+(OUT / 'confirm').mkdir(exist_ok=True)
+(OUT / 'confirm' / 'index.html').write_text(confirm_page())
+(OUT / 'confirm.js').write_text((HERE / 'src/confirm.js').read_text())
 (OUT / 'styles.css').write_text((HERE / 'src/base.css').read_text() + '\n' + (HERE / 'src/site.css').read_text())
 (OUT / 'main.js').write_text((HERE / 'src/form.js').read_text() + '\n' + (HERE / 'src/site.js').read_text())
 if DEV:

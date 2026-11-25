@@ -31,7 +31,7 @@ a { color: var(--p700); }
 .top { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
 .logo { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 1.6rem; letter-spacing: -0.02em; color: var(--p900); text-decoration: none; }
 .logo svg { width: 30px; height: 30px; }
-.logo__mark { width: 34px !important; height: 34px !important; }
+.logo__mark { width: 40px !important; height: 40px !important; }
 .logo__word { font-weight: 700; letter-spacing: -0.03em; line-height: 1; padding-bottom: 2px; }
 
 /* Type */
@@ -94,3 +94,22 @@ a { color: var(--p700); }
 .foot a { color: var(--n700); }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } html { scroll-behavior: auto; } }
+
+/* Waiting list: hidden field for bots, busy state */
+.join__hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.join.is-busy button[type=submit] { opacity: .7; cursor: progress; }
+
+/* Single-message pages (/confirm) */
+.solo { min-height: 100svh; display: flex; flex-direction: column; background: var(--p900); color: #fff; }
+.solo .logo { color: #fff; }
+.solo__top { padding-block: 24px; }
+.solo__main { flex: 1; display: flex; align-items: center; padding-bottom: 12vh; }
+.solo__msg > section { display: none; }
+.solo__msg[data-state="wait"] [data-for="wait"],
+.solo__msg[data-state="ok"] [data-for="ok"],
+.solo__msg[data-state="link"] [data-for="link"],
+.solo__msg[data-state="net"] [data-for="net"] { display: block; }
+.solo__h { margin: 0; font-weight: 700; font-size: clamp(2.2rem, 5.5vw, 3.75rem); line-height: 1.06; letter-spacing: -0.03em; color: #fff; }
+.solo__h:focus { outline: none; }
+.solo__p { margin: 16px 0 0; max-width: 34ch; font-size: 1.15rem; line-height: 1.55; color: rgba(255,255,255,.85); }
+.solo__btn { margin-top: 32px; background: #fff; color: var(--p900); border-color: #fff; font-weight: 600; }
