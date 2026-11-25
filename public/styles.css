@@ -1,0 +1,337 @@
+/* Bricolage Grotesque, self-hosted (SIL Open Font License, see /fonts/OFL.txt). No Google Fonts: no visitor data to Google. */
+@font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 300; font-display: swap; src: url("/fonts/BricolageGrotesque_300Light.ttf") format("truetype"); }
+@font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 400; font-display: swap; src: url("/fonts/BricolageGrotesque_400Regular.ttf") format("truetype"); }
+@font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 500; font-display: swap; src: url("/fonts/BricolageGrotesque_500Medium.ttf") format("truetype"); }
+@font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 600; font-display: swap; src: url("/fonts/BricolageGrotesque_600SemiBold.ttf") format("truetype"); }
+@font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 700; font-display: swap; src: url("/fonts/BricolageGrotesque_700Bold.ttf") format("truetype"); }
+
+/* getawa.app: shared base.
+   Tokens = the app's src/theme values. One typeface: Bricolage Grotesque. */
+:root {
+  --p100: #EDF5FF; --p300: #B2D4FF; --p500: #65A0FE; --p700: #4073CC; --p900: #1F4080;
+  --s100: #FFF1E8; --s300: #FFE4D6; --s500: #FF9E7D; --s700: #E57E73; --s900: #AD5047;
+  --t100: #EDF5ED; --t300: #C7D9C7; --t500: #72B172; --t700: #5B7D60; --t900: #335438;
+  --n50: #FAF7F5; --n100: #F2EDE8; --n300: #D6CFC7; --n700: #615952; --n900: #211F1C;
+  --white: #fff;
+  --font: "Bricolage Grotesque", system-ui, sans-serif;
+  --wrap: 1120px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--font); font-size: 1rem; line-height: 1.5; color: var(--n900); background: var(--white); }
+img, svg { display: block; max-width: 100%; }
+h1, h2, h3, p { margin: 0; }
+a { color: var(--p700); }
+:focus-visible { outline: 2px solid var(--p900); outline-offset: 3px; border-radius: 4px; }
+.wrap { width: min(var(--wrap), 100% - 32px); margin-inline: auto; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* Draft switcher (not part of the page) */
+
+/* Top bar */
+.top { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
+.logo { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 1.6rem; letter-spacing: -0.02em; color: var(--p900); text-decoration: none; }
+.logo svg { width: 30px; height: 30px; }
+.logo__mark { width: 34px !important; height: 34px !important; }
+.logo__word { font-weight: 700; letter-spacing: -0.03em; line-height: 1; padding-bottom: 2px; }
+
+/* Type */
+.h1 { font-weight: 700; font-size: clamp(2.5rem, 6vw, 4.25rem); line-height: 1.04; letter-spacing: -0.03em; color: var(--p900); }
+.h2 { font-weight: 700; font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1.12; letter-spacing: -0.02em; color: var(--p900); }
+.h3 { font-weight: 600; font-size: 1.375rem; line-height: 1.35; color: var(--p900); }
+.lead { font-size: 1.125rem; line-height: 1.6; color: var(--n700); max-width: 46ch; }
+.body { color: var(--n700); max-width: 56ch; }
+
+/* Buttons + waiting list form */
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 1.25rem; border-radius: 999px; font: inherit; font-size: 1rem; text-decoration: none; cursor: pointer; border: 1.5px solid var(--p900); }
+.btn--primary { background: var(--p900); color: #fff; }
+.btn--primary:hover { background: var(--p700); border-color: var(--p700); }
+.join { display: grid; gap: 10px; max-width: 460px; }
+.join__row { display: flex; gap: 8px; flex-wrap: wrap; }
+.join input { flex: 1 1 220px; min-height: 48px; padding: 0 1.1rem; border-radius: 999px; border: 1.5px solid var(--p700); font: inherit; font-size: 1rem; color: var(--n900); background: #fff; }
+.join input::placeholder { color: var(--n700); }
+.join .btn { flex: 0 0 auto; }
+.join__ok { display: none; padding: 14px 18px; border-radius: 16px; background: var(--t100); color: var(--t900); }
+.join__ok b { display: block; font-size: 1.05rem; }
+.join.is-sent .join__row { display: none; }
+.join.is-sent .join__ok { display: block; }
+.join__err { display: none; font-size: .875rem; font-weight: 600; color: var(--s900); }
+.join.is-err .join__err { display: block; }
+/* The same week, read two ways (from the portfolio) */
+
+/* How it works, to try (from the portfolio) */
+.how { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.pills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 4px; }
+.pill { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; font: inherit; font-size: .9rem; font-weight: 600; border-radius: 999px; border: 1px solid; background: #fff; cursor: pointer; }
+.pill i { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.pill.is-good { color: var(--t900); border-color: var(--t300); } .pill.is-good i { background: var(--t500); }
+.pill.is-bad { color: var(--s900); border-color: var(--s300); } .pill.is-bad i { background: var(--s700); }
+.pill.is-good[aria-pressed="true"] { background: var(--t100); border-color: var(--t500); }
+.pill.is-bad[aria-pressed="true"] { background: var(--s100); border-color: var(--s700); }
+.meadow { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); align-items: end; justify-items: center; height: 5.25rem; margin-top: 12px; }
+.meadow span { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.meadow span::after { content: ""; width: 1px; height: calc(10px + var(--n, 0) * 5px); background: var(--stem); }
+.meadow i { width: 10px; height: 10px; border-radius: 50%; }
+.days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); text-align: center; font-size: .75rem; font-weight: 600; color: var(--ink); margin-top: 6px; }
+@media (max-width: 860px) { .how { grid-template-columns: 1fr; } }
+
+/* Privacy list */
+.priv { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.priv li { display: grid; grid-template-columns: 24px 1fr; gap: 12px; align-items: start; color: var(--n900); }
+.priv svg { width: 24px; height: 24px; fill: none; stroke: var(--p900); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Questions */
+.faq { display: grid; gap: 8px; }
+.faq details { border: 1px solid var(--n100); border-radius: 16px; background: #fff; }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 16px; align-items: center; min-height: 56px; padding: 12px 20px; font-weight: 600; font-size: 1.05rem; color: var(--p900); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-size: 1.5rem; font-weight: 400; line-height: 1; }
+.faq details[open] summary::after { content: "−"; }
+.faq details p { padding: 0 20px 18px; color: var(--n700); }
+
+/* Footer */
+.foot { padding: 32px 0 96px; border-top: 1px solid var(--n100); display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; color: var(--n700); font-size: .9rem; }
+.foot nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.foot a { color: var(--n700); }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } html { scroll-behavior: auto; } }
+
+/* Direction D: Plant a feeling + Minutes become feelings (draft 2026-11-24) */
+body { overflow-x: hidden; }
+
+/* ---------- Top: logo and a link, no bar. It lives in the hero and leaves with it. ---------- */
+.top { position: absolute; z-index: 3; top: 12px; left: 0; right: 0; display: block; padding: 0; }
+.top__bar { width: min(var(--wrap), 100% - 24px); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 8px 8px 18px; }
+.top .logo { font-size: 1.35rem; color: #fff; transition: color .6s ease; }
+.top__link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; font-weight: 600; color: #fff; text-decoration: none; transition: color .6s ease, background-color .2s ease; }
+.top__link:hover { background: rgba(255,255,255,.12); }
+.hero.is-white .top .logo, .hero.is-white .top__link { color: var(--p900); }
+.hero.is-white .top__link:hover { background: var(--p100); }
+
+/* ---------- Hero: the meadow grows ----------
+   The hero is pinned while you scroll the first screen and a bit: that scroll grows the meadow
+   from the ground instead of moving the page. Then the page scrolls on as normal.
+   Layers, back to front: background (navy, then white), soft light, far meadow (blurred), text, near meadow. */
+.hero-pin { position: relative; height: 230svh; background: var(--p900); }
+.hero { position: sticky; top: 0; height: 100svh; min-height: 600px; background: var(--p900); overflow: hidden; display: flex; flex-direction: column; }
+.hero__bg, .hero__canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+.hero__canvas { touch-action: pan-y; }
+.hero__back { position: absolute; z-index: 0; left: -16px; top: -16px; width: calc(100% + 32px); height: calc(100% + 32px); filter: blur(3px); opacity: .6; will-change: transform; }
+.glow { position: absolute; z-index: 0; border-radius: 50%; filter: blur(90px); pointer-events: none; transition: background-color 1.2s ease, opacity 1.2s ease; animation: drift 24s ease-in-out infinite alternate; }
+.glow--1 { width: 620px; height: 620px; left: -200px; top: -180px; background: var(--p700); opacity: .35; }
+.glow--2 { width: 560px; height: 560px; right: 4%; top: 18%; background: var(--p500); opacity: .18; animation-delay: -9s; }
+.glow--3 { width: 420px; height: 420px; right: -120px; bottom: -60px; background: var(--p700); opacity: .3; animation-delay: -15s; }
+.hero.is-white .glow--1 { background: var(--p100); opacity: 1; }
+.hero.is-white .glow--2 { background: var(--t100); opacity: 1; }
+.hero.is-white .glow--3 { background: var(--s100); opacity: 1; }
+.hero__copy, .hero__hint { position: relative; z-index: 1; }
+/* the meadow fades into the ground, so the hero melts into the next section instead of ending on a line */
+.hero::after { content: ""; position: absolute; z-index: 0; left: 0; right: 0; bottom: 0; height: 90px; pointer-events: none; background: linear-gradient(rgba(31,64,128,0), var(--p900)); transition: opacity 1.2s ease; }
+.hero.is-white::after { background: linear-gradient(rgba(255,255,255,0), #fff); }
+.hero__copy { display: grid; gap: 22px; justify-items: start; text-align: left; padding-top: clamp(104px, 16vh, 150px); pointer-events: none; }
+.hero__copy > * { pointer-events: auto; }
+.hero__copy .h1 { font-size: clamp(2.8rem, 6.2vw, 5.4rem); max-width: 8.4em; color: #fff; }
+.hero__copy .lead { max-width: 44ch; color: rgba(255,255,255,.88); }
+.hero__hint { position: absolute; left: 0; right: 0; bottom: 24px; text-align: center; font-size: .95rem; font-weight: 600; color: #fff; text-shadow: 0 1px 10px var(--p900), 0 0 4px var(--p900); pointer-events: none; transition: opacity .6s ease; }
+.hero__hint span { display: block; transition: opacity .5s ease; }
+.hero__hint .hint-b { position: absolute; left: 0; right: 0; top: 0; opacity: 0; }
+.hero__hint .hint-a::after { content: ""; display: block; width: 1.5px; height: 18px; margin: 8px auto 0; background: rgba(255,255,255,.7); border-radius: 2px; animation: nudge 1.6s ease-in-out infinite; }
+@keyframes nudge { 0%, 100% { transform: translateY(0); opacity: .4; } 50% { transform: translateY(6px); opacity: 1; } }
+.hero.is-grown .hint-a { opacity: 0; }
+.hero.is-grown .hint-b { opacity: 1; }
+.hero.is-played .hero__hint { opacity: 0; }
+
+/* One button with some shine; pressing it opens the email field in its place */
+.cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; margin-top: 8px; justify-self: stretch; max-width: 460px; }
+.cta__open { min-height: 56px; padding: 0 1.75rem; font-size: 1.05rem; font-weight: 500; border: 0; background: #fff; color: var(--p900); transition: background-color .6s ease, color .6s ease; }
+.cta__open:hover { background: var(--p100); }
+.cta .join { display: none; width: min(460px, 100%); }
+.cta.is-open .cta__open { display: none; }
+.cta.is-open .join { display: grid; flex: 1 1 100%; max-width: none; }
+.hero.is-white .cta__open { background: var(--p900); color: #fff; }
+.hero.is-white .cta__open:hover { background: var(--p700); }
+@media (max-width: 700px) {
+  .hero__copy { gap: 18px; padding-top: 96px; }
+  .cta__open { width: 100%; }
+}
+
+/* Woken up: the hero is white, text turns navy (fades with the white spreading) */
+.hero__copy .h1, .hero__copy .lead, .hero__hint { transition: color .6s ease, opacity .6s ease; }
+.hero.is-white .hero__copy .h1 { color: var(--p900); }
+.hero.is-white .hero__copy .lead { color: var(--n700); }
+.hero.is-white .hero__hint { color: var(--n700); text-shadow: none; }
+.hero.is-white .glass-join .join__row { background: rgba(31,64,128,.07); }
+.hero.is-white .glass-join .join__row:focus-within { background: rgba(31,64,128,.11); }
+.hero.is-white .glass-join input { color: var(--n900); }
+.hero.is-white .glass-join input::placeholder { color: var(--n700); }
+.hero.is-white .glass-join .btn--primary { background: var(--p900); color: #fff; }
+.hero.is-white .glass-join .btn--primary:hover { background: var(--p700); }
+.hero.is-white .glass-join .join__err { color: var(--s900); }
+.glass-join .join__row, .glass-join input, .glass-join .btn--primary { transition: background-color .6s ease, border-color .6s ease, color .6s ease, box-shadow .6s ease; }
+
+/* Waiting list field (hero and final): light, no stroke. Input and button sit in one soft capsule;
+   focus is shown by the capsule filling in. */
+.glass-join .join__row { flex-wrap: nowrap; gap: 6px; padding: 6px; border-radius: 999px; width: 100%; border: 0;
+  background: rgba(255,255,255,.12); -webkit-backdrop-filter: blur(16px) saturate(150%); backdrop-filter: blur(16px) saturate(150%); }
+.glass-join .join__row:focus-within { background: rgba(255,255,255,.22); }
+.glass-join input { flex: 1 1 auto; min-width: 0; border: 0; background: transparent; color: #fff; padding-left: 1rem; }
+.glass-join input::placeholder { color: rgba(255,255,255,.8); }
+.glass-join input:focus-visible { outline: none; }
+.glass-join .btn--primary { background: #fff; color: var(--p900); border: 0; }
+.glass-join .btn--primary:hover { background: var(--p100); }
+.glass-join .join__err { color: #fff; }
+.glass-join :focus-visible { outline-color: #fff; }
+@media (max-width: 520px) {
+  .glass-join .join__row { flex-direction: column; border-radius: 28px; }
+  .glass-join input { padding: 0 1rem; }
+}
+
+/* ---------- Story: minutes become feelings ---------- */
+.story { position: relative; height: 520vh; }
+.story__stage { position: sticky; top: 0; height: 100svh; overflow-x: clip; overflow-y: visible; }   /* light fades past the bottom, no hard cut */
+.story__near { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+/* depth, like the hero: soft light, then a blurred far meadow (fills in at the end), then the sharp week */
+.story__far { position: absolute; z-index: 0; left: -16px; top: -16px; width: calc(100% + 32px); height: calc(100% + 32px); filter: blur(3px); opacity: .6; }
+.sglow--1 { width: 560px; height: 560px; left: -160px; top: 28%; background: var(--p100); }
+.sglow--2 { width: 520px; height: 520px; left: 38%; top: 30%; background: var(--t100); animation-delay: -7s; }
+.sglow--3 { width: 460px; height: 460px; right: -120px; top: 50%; background: var(--s100); animation-delay: -13s; }
+.story__lines { position: absolute; z-index: 2; left: 0; right: 0; top: clamp(56px, 12vh, 120px); text-align: center; padding: 0 16px; }
+.story__line { position: absolute; left: 16px; right: 16px; margin: 0 auto; max-width: 18ch; font-weight: 500; font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.08; letter-spacing: -0.025em; color: var(--p900); opacity: 0; transform: translateY(16px); transition: opacity .2s ease, transform .2s ease; }
+.story__line.is-on { opacity: 1; transform: none; transition: opacity .45s ease .2s, transform .45s ease .2s; }
+.story__line .grey { color: var(--n700); }
+
+/* ---------- After the story ---------- */
+.sec { padding: 112px 0; }
+.centered { display: grid; gap: 14px; justify-items: center; text-align: center; align-content: start; }
+.centered { max-width: 640px; margin-inline: auto; }
+.centered .lead { text-align: center; }
+.sprout { display: flex; flex-direction: column; align-items: center; gap: 4px; height: 76px; justify-content: flex-end; margin-bottom: 6px; }
+.sprout::after { content: ""; width: 1.5px; height: 30px; background: var(--t300); transform-origin: bottom; transform: scaleY(0); transition: transform .8s cubic-bezier(.22,1,.36,1); }
+.sprout i { width: 14px; height: 14px; border-radius: 50%; transform: scale(0); transition: transform .5s cubic-bezier(.34,1.56,.64,1); }
+.sprout.is-in::after { transform: none; }
+.sprout.is-in i { transform: none; }
+.sprout.is-in i:nth-last-child(1) { transition-delay: .5s; }
+.sprout.is-in i:nth-last-child(2) { transition-delay: .65s; }
+.sprout.is-in i:nth-last-child(3) { transition-delay: .8s; }
+.qa { max-width: 760px; margin: 40px auto 0; }
+
+/* ---------- Glass on the white sections: soft colour drifting behind frosted cards ---------- */
+.soft { position: relative; overflow-x: clip; overflow-y: visible; isolation: isolate; }   /* light can drift past the edges, no hard cut */
+.blob { position: absolute; z-index: -1; border-radius: 50%; filter: blur(70px); opacity: .7; animation: drift 26s ease-in-out infinite alternate; }
+.blob--1 { width: 520px; height: 520px; left: -140px; top: 40px; background: var(--t300); }
+.blob--2 { width: 460px; height: 460px; right: -120px; top: 520px; background: var(--p300); animation-delay: -8s; }
+.blob--3 { width: 420px; height: 420px; left: 10%; top: 1250px; background: var(--s300); animation-delay: -14s; }
+.blob--4 { width: 520px; height: 520px; right: 5%; top: 1900px; background: var(--p300); opacity: .55; animation-delay: -4s; }
+@keyframes drift { from { transform: translate(0, 0) scale(1); } to { transform: translate(90px, -60px) scale(1.12); } }
+.glass { background: rgba(255,255,255,.55); border: 1px solid rgba(255,255,255,.9); border-radius: 32px;
+  -webkit-backdrop-filter: blur(22px) saturate(150%); backdrop-filter: blur(22px) saturate(150%);
+  box-shadow: 0 12px 40px rgba(31,64,128,.08), inset 0 1px 0 rgba(255,255,255,.95); }
+.centered.glass { padding: 40px 32px 44px; }
+.soft .faq details { background: rgba(255,255,255,.55); border-color: rgba(255,255,255,.9);
+  -webkit-backdrop-filter: blur(18px) saturate(150%); backdrop-filter: blur(18px) saturate(150%);
+  box-shadow: 0 6px 24px rgba(31,64,128,.06); }
+
+/* ---------- So, how does Awa work? Log, See, Decide in three glass tiles, drawn like the app ---------- */
+.try .centered { gap: 10px; }
+.try__tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 48px; align-items: stretch; }
+.try__tile { display: flex; flex-direction: column; gap: 14px; padding: 28px; min-height: 520px; }
+.try__num { font-size: .95rem; font-weight: 600; color: var(--p700); }
+.try__q { font-size: 1.3rem; font-weight: 600; line-height: 1.3; color: var(--p900); margin: 0; }
+/* 1 · the app's emotion pills: tint + icon, solid when picked */
+.try__chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.try__chip { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border-radius: 128px; border: 0; font: inherit; font-size: .95rem;
+  background: var(--t100); color: var(--t900); cursor: pointer; transition: background-color .2s ease, color .2s ease; }
+.try__chip svg { width: 18px; height: 18px; color: var(--t700); flex: none; transition: color .2s ease; }
+.try__chip.is-bad { background: var(--s100); color: var(--s900); }
+.try__chip.is-bad svg { color: var(--s700); }
+.try__chip[aria-pressed="true"] { background: var(--t700); color: #fff; }
+.try__chip.is-bad[aria-pressed="true"] { background: var(--s900); }
+.try__chip[aria-pressed="true"] svg { color: #fff; }
+.try__hint { font-size: .95rem; font-weight: 600; color: var(--p700); }
+.try.is-logged .try__hint { visibility: hidden; }
+/* 2 · the home screen's log list */
+.try__logs { list-style: none; margin: 6px 0 0; padding: 0; display: grid; }
+.try__log { position: relative; display: grid; grid-template-columns: 34px 40px 1fr; gap: 14px; align-items: center; padding: 7px 0; }
+.try__log + .try__log::before { content: ""; position: absolute; left: calc(34px + 14px + 19.5px); top: -7px; height: 14px; width: 1px; background: var(--n100); }
+.try__date { display: grid; line-height: 1.1; }
+.try__date b { font-size: 1.1rem; font-weight: 600; color: var(--p900); }
+.try__date span { font-size: .8rem; color: var(--n700); }
+.try__ic { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--t100); color: var(--t900); }
+.try__ic svg { width: 18px; height: 18px; }
+.try__ic.is-bad { background: var(--s100); color: var(--s900); }
+.try__what { display: grid; gap: 0; line-height: 1.35; }
+.try__what b { font-size: 1rem; font-weight: 600; color: var(--p900); }
+.try__what span { font-size: .875rem; color: var(--n700); }
+.try__log--new { display: none; }
+.try.is-logged .try__log--new { display: grid; animation: logIn .6s cubic-bezier(.22,1,.36,1); }
+.try.is-logged .try__log--empty { display: none; }
+.try__log--empty .try__ic { background: transparent; border: 1.5px dashed var(--n300); }
+.try__log--empty .try__what { color: var(--n700); }
+@keyframes logIn { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: none; } }
+/* 3 · the app's dandelion and insight */
+.try__clock { width: min(280px, 100%); height: auto; margin: -4px auto -8px; display: block; overflow: visible; }
+.try__cap { text-align: center; font-size: .9rem; font-weight: 600; color: var(--p700); }
+.try__insight { display: grid; gap: 6px; }
+.try__title { font-size: 1.15rem; font-weight: 600; line-height: 1.3; color: var(--t900); }
+.try.is-bad .try__title { color: var(--s900); }
+.try__body { color: var(--n700); line-height: 1.5; }
+@media (max-width: 1000px) {
+  .try__tiles { grid-template-columns: 1fr; gap: 16px; margin-top: 32px; max-width: 520px; margin-inline: auto; }
+  .try__tile { min-height: 0; padding: 24px 20px; }
+}
+
+/* ---------- Statements: big light lines on the left, text on the right, no boxes ---------- */
+.rows .row { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; padding: 64px 0; }
+.rows .row + .row::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(214,207,199,.55) 20%, rgba(214,207,199,.55) 80%, transparent); }
+.rows .row:first-child { padding-top: 0; }
+.rows .st { margin: 0; font-weight: 400; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -0.02em; color: var(--p900); }
+.rows .lead { max-width: 46ch; padding-top: 6px; }
+.rows .priv { gap: 20px; }
+.rows .priv li { grid-template-columns: 44px 1fr; gap: 16px; align-items: start; font-size: 1.05rem; line-height: 1.55; }
+.rows .priv li > span:last-child { padding-top: 10px; }
+.priv__ic { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--p100); }
+.rows .priv svg { width: 20px; height: 20px; }
+@media (max-width: 860px) {
+  .rows .row { grid-template-columns: 1fr; gap: 16px; padding: 40px 0; }
+}
+
+/* ---------- Final: a glass card over the navy meadow ---------- */
+.final { position: relative; background: var(--p900); color: #fff; padding: 140px 0 200px; overflow: hidden; }
+.final .field-canvas { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; }
+.final__card { position: relative; z-index: 2; gap: 20px; padding: 48px 32px; border-radius: 32px;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2);
+  -webkit-backdrop-filter: blur(20px) saturate(150%); backdrop-filter: blur(20px) saturate(150%);
+  box-shadow: 0 20px 60px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.16); }
+.final .h2 { color: #fff; font-size: clamp(2.2rem, 5vw, 3.6rem); }
+.final .join { width: 100%; justify-items: center; }
+/* ---------- Footer: navy, continues the final meadow. Compact: Teresa's note left, links right. ---------- */
+.foot { display: block; padding: 28px 0 32px; border: 0; background: var(--p900); color: rgba(255,255,255,.8); font-size: .9rem; }
+.foot__in { display: grid; grid-template-columns: minmax(0, 560px) auto; justify-content: space-between; align-items: end; gap: 24px 48px; }
+.foot__me { display: grid; gap: 4px; justify-items: start; }
+.foot__h { margin: 0; font-size: 1rem; font-weight: 600; line-height: 1.4; color: #fff; }
+.foot__me p { line-height: 1.55; color: rgba(255,255,255,.8); }
+.foot__me a { margin-top: 2px; }
+.foot a { color: var(--p300); }
+.foot a:hover { color: #fff; }
+.foot :focus-visible { outline-color: #fff; }
+.foot__base { display: grid; gap: 6px; justify-items: end; text-align: right; }
+.foot__base nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 18px; order: -1; }
+.foot__base a { color: rgba(255,255,255,.85); }
+@media (max-width: 760px) {
+  .foot__in { grid-template-columns: 1fr; align-items: start; }
+  .foot__base { justify-items: start; text-align: left; }
+  .foot__base nav { justify-content: flex-start; }
+}
+
+@media (max-width: 860px) {
+  .sec { padding: 80px 0; }
+}
+@media (max-width: 520px) {
+  .centered.glass, .final__card { padding: 32px 20px 36px; }
+  .final { padding: 120px 0 160px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sprout::after, .sprout i { transform: none; }
+  .hero-pin { height: auto; }
+  .hero { position: relative; }
+  .glow { animation: none; }
+}

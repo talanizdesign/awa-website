@@ -1,0 +1,96 @@
+/* Bricolage Grotesque, self-hosted (SIL Open Font License, see /fonts/OFL.txt). No Google Fonts: no visitor data to Google. */
+@font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 300; font-display: swap; src: url("/fonts/BricolageGrotesque_300Light.ttf") format("truetype"); }
+@font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 400; font-display: swap; src: url("/fonts/BricolageGrotesque_400Regular.ttf") format("truetype"); }
+@font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 500; font-display: swap; src: url("/fonts/BricolageGrotesque_500Medium.ttf") format("truetype"); }
+@font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 600; font-display: swap; src: url("/fonts/BricolageGrotesque_600SemiBold.ttf") format("truetype"); }
+@font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 700; font-display: swap; src: url("/fonts/BricolageGrotesque_700Bold.ttf") format("truetype"); }
+
+/* getawa.app: shared base.
+   Tokens = the app's src/theme values. One typeface: Bricolage Grotesque. */
+:root {
+  --p100: #EDF5FF; --p300: #B2D4FF; --p500: #65A0FE; --p700: #4073CC; --p900: #1F4080;
+  --s100: #FFF1E8; --s300: #FFE4D6; --s500: #FF9E7D; --s700: #E57E73; --s900: #AD5047;
+  --t100: #EDF5ED; --t300: #C7D9C7; --t500: #72B172; --t700: #5B7D60; --t900: #335438;
+  --n50: #FAF7F5; --n100: #F2EDE8; --n300: #D6CFC7; --n700: #615952; --n900: #211F1C;
+  --white: #fff;
+  --font: "Bricolage Grotesque", system-ui, sans-serif;
+  --wrap: 1120px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--font); font-size: 1rem; line-height: 1.5; color: var(--n900); background: var(--white); }
+img, svg { display: block; max-width: 100%; }
+h1, h2, h3, p { margin: 0; }
+a { color: var(--p700); }
+:focus-visible { outline: 2px solid var(--p900); outline-offset: 3px; border-radius: 4px; }
+.wrap { width: min(var(--wrap), 100% - 32px); margin-inline: auto; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* Draft switcher (not part of the page) */
+
+/* Top bar */
+.top { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
+.logo { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 1.6rem; letter-spacing: -0.02em; color: var(--p900); text-decoration: none; }
+.logo svg { width: 30px; height: 30px; }
+.logo__mark { width: 34px !important; height: 34px !important; }
+.logo__word { font-weight: 700; letter-spacing: -0.03em; line-height: 1; padding-bottom: 2px; }
+
+/* Type */
+.h1 { font-weight: 700; font-size: clamp(2.5rem, 6vw, 4.25rem); line-height: 1.04; letter-spacing: -0.03em; color: var(--p900); }
+.h2 { font-weight: 700; font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1.12; letter-spacing: -0.02em; color: var(--p900); }
+.h3 { font-weight: 600; font-size: 1.375rem; line-height: 1.35; color: var(--p900); }
+.lead { font-size: 1.125rem; line-height: 1.6; color: var(--n700); max-width: 46ch; }
+.body { color: var(--n700); max-width: 56ch; }
+
+/* Buttons + waiting list form */
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 1.25rem; border-radius: 999px; font: inherit; font-size: 1rem; text-decoration: none; cursor: pointer; border: 1.5px solid var(--p900); }
+.btn--primary { background: var(--p900); color: #fff; }
+.btn--primary:hover { background: var(--p700); border-color: var(--p700); }
+.join { display: grid; gap: 10px; max-width: 460px; }
+.join__row { display: flex; gap: 8px; flex-wrap: wrap; }
+.join input { flex: 1 1 220px; min-height: 48px; padding: 0 1.1rem; border-radius: 999px; border: 1.5px solid var(--p700); font: inherit; font-size: 1rem; color: var(--n900); background: #fff; }
+.join input::placeholder { color: var(--n700); }
+.join .btn { flex: 0 0 auto; }
+.join__ok { display: none; padding: 14px 18px; border-radius: 16px; background: var(--t100); color: var(--t900); }
+.join__ok b { display: block; font-size: 1.05rem; }
+.join.is-sent .join__row { display: none; }
+.join.is-sent .join__ok { display: block; }
+.join__err { display: none; font-size: .875rem; font-weight: 600; color: var(--s900); }
+.join.is-err .join__err { display: block; }
+/* The same week, read two ways (from the portfolio) */
+
+/* How it works, to try (from the portfolio) */
+.how { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.pills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 4px; }
+.pill { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; font: inherit; font-size: .9rem; font-weight: 600; border-radius: 999px; border: 1px solid; background: #fff; cursor: pointer; }
+.pill i { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.pill.is-good { color: var(--t900); border-color: var(--t300); } .pill.is-good i { background: var(--t500); }
+.pill.is-bad { color: var(--s900); border-color: var(--s300); } .pill.is-bad i { background: var(--s700); }
+.pill.is-good[aria-pressed="true"] { background: var(--t100); border-color: var(--t500); }
+.pill.is-bad[aria-pressed="true"] { background: var(--s100); border-color: var(--s700); }
+.meadow { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); align-items: end; justify-items: center; height: 5.25rem; margin-top: 12px; }
+.meadow span { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.meadow span::after { content: ""; width: 1px; height: calc(10px + var(--n, 0) * 5px); background: var(--stem); }
+.meadow i { width: 10px; height: 10px; border-radius: 50%; }
+.days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); text-align: center; font-size: .75rem; font-weight: 600; color: var(--ink); margin-top: 6px; }
+@media (max-width: 860px) { .how { grid-template-columns: 1fr; } }
+
+/* Privacy list */
+.priv { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.priv li { display: grid; grid-template-columns: 24px 1fr; gap: 12px; align-items: start; color: var(--n900); }
+.priv svg { width: 24px; height: 24px; fill: none; stroke: var(--p900); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Questions */
+.faq { display: grid; gap: 8px; }
+.faq details { border: 1px solid var(--n100); border-radius: 16px; background: #fff; }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 16px; align-items: center; min-height: 56px; padding: 12px 20px; font-weight: 600; font-size: 1.05rem; color: var(--p900); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-size: 1.5rem; font-weight: 400; line-height: 1; }
+.faq details[open] summary::after { content: "−"; }
+.faq details p { padding: 0 20px 18px; color: var(--n700); }
+
+/* Footer */
+.foot { padding: 32px 0 96px; border-top: 1px solid var(--n100); display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; color: var(--n700); font-size: .9rem; }
+.foot nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.foot a { color: var(--n700); }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } html { scroll-behavior: auto; } }
