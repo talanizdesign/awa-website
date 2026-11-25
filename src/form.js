@@ -36,7 +36,10 @@ document.querySelectorAll('.join').forEach(function (form) {
       } else if (res.status === 400) {
         fail('Enter a valid email address.');
       } else if (res.status === 429) {
-        fail('Lots of people are joining right now. Try again in a few minutes.');
+        return res.json().then(function (b) {
+          fail(b && b.error === 'day' ? 'Lots of people are joining today. Try again tomorrow.'
+                                      : 'Lots of people are joining right now. Try again in a few minutes.');
+        }, function () { fail('Lots of people are joining right now. Try again in a few minutes.'); });
       } else {
         fail('Something went wrong. Try again in a minute.');
       }

@@ -26,6 +26,7 @@ const ORIGINS = new Set([SITE, 'https://www.getawa.app', 'https://awa-website.pa
 const RESEND_AFTER_MIN = 10;   // a second email to the same address only after 10 minutes
 const MAX_SENDS = 3;           // and at most 3 per address
 const MAX_PER_HOUR = 60;       // all addresses together, to protect the sending domain
+const MAX_PER_DAY = 70;        // Resend free plan = 100 a day, shared with the app's sign-in codes: keep 30 for them
 const LINK_DAYS = 7;           // matches the nightly clean-up in waitlist.sql
 
 function cors(origin: string | null) {
@@ -107,8 +108,11 @@ async function join(body: Record<string, unknown>, origin: string | null) {
   const email = String(body.email ?? '').trim().toLowerCase();
   if (!validEmail(email)) return reply(400, { error: 'email' }, origin);
 
-  const [{ n }] = await sql`select count(*)::int as n from waitlist.people where last_sent_at > now() - interval '1 hour'`;
-  if (n >= MAX_PER_HOUR) return reply(429, { error: 'busy' }, origin);
+  const [{ hour, day }] = await sql`select count(*) filter (where last_sent_at > now() - interval '1 hour')::int as hour,
+                                           count(*)::int as day
+                                    from waitlist.people where last_sent_at > now() - interval '24 hours'`;
+  if (day >= MAX_PER_DAY) return reply(429, { error: 'day' }, origin);
+  if (hour >= MAX_PER_HOUR) return reply(429, { error: 'busy' }, origin);
 
   const site = origin && ORIGINS.has(origin) ? origin : SITE;
   const token = newToken();
