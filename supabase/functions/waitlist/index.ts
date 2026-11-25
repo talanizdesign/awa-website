@@ -21,7 +21,7 @@ const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY') ?? '';
 const MAIL_FROM = Deno.env.get('MAIL_FROM') ?? 'Awa <hello@getawa.app>';
 
 const SITE = 'https://getawa.app';
-const ORIGINS = new Set([SITE, 'https://www.getawa.app', 'https://awa-website.pages.dev', 'http://localhost:5195']);
+const ORIGINS = new Set([SITE, 'https://www.getawa.app', 'https://awa-website-4tv.pages.dev', 'http://localhost:5195']);
 
 const RESEND_AFTER_MIN = 10;   // a second email to the same address only after 10 minutes
 const MAX_SENDS = 3;           // and at most 3 per address
