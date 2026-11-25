@@ -71,8 +71,10 @@ document.querySelectorAll('.join').forEach(function (form) {
     return 'rgb(' + r + ',' + g + ',' + bl + ')';
   }
   function rng(seed) { return function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }; }
-  function fit(canvas) {
-    var dpr = Math.min(window.devicePixelRatio || 1, 2), w = canvas.clientWidth, h = canvas.clientHeight;
+  // max = highest pixel ratio. Soft, blurred layers use 0.5: the blur hides the detail anyway,
+  // and drawing a quarter of the pixels every frame keeps scrolling smooth on big screens.
+  function fit(canvas, max) {
+    var dpr = Math.min(window.devicePixelRatio || 1, max || 2), w = canvas.clientWidth, h = canvas.clientHeight;
     canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
     var ctx = canvas.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     return { ctx: ctx, w: w, h: h };
@@ -232,7 +234,7 @@ document.querySelectorAll('.join').forEach(function (form) {
   Grow.prototype.local = function (e) { var r = this.canvas.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
   Grow.prototype.layout = function () {
     var oldW = this.w, f = fit(this.canvas); this.ctx = f.ctx; this.w = f.w; this.h = f.h;
-    this.bctx = fit(this.bgCanvas).ctx; this.kctx = fit(this.backCanvas).ctx;
+    this.bctx = fit(this.bgCanvas, 0.5).ctx; this.kctx = fit(this.backCanvas, 0.5).ctx;
     // The meadow stays below the text on the left, and grows taller on the right where there is room.
     var hr = this.hero.getBoundingClientRect(), right = 0, bottom = 0;
     Array.prototype.forEach.call(this.copy.children, function (el) { var r = el.getBoundingClientRect(); right = Math.max(right, r.right); bottom = Math.max(bottom, r.bottom); });
@@ -309,9 +311,9 @@ document.querySelectorAll('.join').forEach(function (form) {
     if (Math.abs(G - this.g) < 0.001) this.g = G;
     this.hero.classList.toggle('is-grown', this.g > 0.97);
     var fresh = p && now - p.at < 60, speed = p ? Math.hypot(p.vx, p.vy) : 0;
-    if (!this.wake && this.g > 0.97 && fresh && speed > 2 && p.y > H - this.room(p.x) - 20) this.startWake(p.x, p.y);
-    if (this.wake) this.wp = still ? 1 : ease(clamp((now - this.wake) / 1600));
-    this.hero.classList.toggle('is-white', this.wp > 0.3);
+    if (!this.wake && this.g > 0.97 && fresh && speed > 1) this.startWake(p.x, p.y);   // any move over the grown hero wakes it
+    if (this.wake) this.wp = still ? 1 : ease(clamp((now - this.wake) / 900));
+    this.hero.classList.toggle('is-white', this.wp > 0.12);
     this.stems.forEach(function (s) {
       s.local = clamp((self.g - s.ord * 0.55) / 0.45);
       s.gr = 1 - Math.pow(1 - s.local, 3);
@@ -320,7 +322,7 @@ document.querySelectorAll('.join').forEach(function (form) {
         var h = H - p.y;
         if (h > -10 && h < L + 30) {
           var d = Math.abs(p.x - (s.x + Math.sin(s.bend) * Math.max(0, h)));
-          if (d < 26) s.bv += clamp(p.vx * 0.0045 * (1 - d / 26) * (0.4 + h / L), -0.08, 0.08);
+          if (d < 34) s.bv += clamp(p.vx * 0.009 * (1 - d / 34) * (0.4 + h / L), -0.14, 0.14);
         }
         // brushing right through a seed sometimes lets it go
         (s.pos || []).forEach(function (q, j) {
@@ -328,7 +330,7 @@ document.querySelectorAll('.join').forEach(function (form) {
           if (dot.on && dot.re >= 1 && s.local > 0.95 && speed > 4 && Math.hypot(q.x - p.x, q.y - p.y) < 11 && Math.random() < 0.3) self.release({ dot: dot, x: q.x, y: q.y });
         });
       }
-      s.bv += -s.bend * 0.05 * k; s.bv *= Math.pow(0.9, k); s.bend = clamp(s.bend + s.bv * k, -0.5, 0.5);
+      s.bv += -s.bend * 0.07 * k; s.bv *= Math.pow(0.9, k); s.bend = clamp(s.bend + s.bv * k, -0.5, 0.5);
       s.dots.forEach(function (d) {
         if (!d.on && now > d.back) d.on = true;
         if (d.on && d.re < 1) d.re = Math.min(1, d.re + 0.04 * k);
@@ -337,7 +339,7 @@ document.querySelectorAll('.join').forEach(function (form) {
     this.back.forEach(function (s) { s.local = clamp((self.g - s.ord * 0.55) / 0.45); s.gr = 1 - Math.pow(1 - s.local, 3); });
     // the far meadow shifts a little against the pointer, slower than the near one: depth
     var tx = p && !still ? (p.x - this.w / 2) * -0.03 : 0;
-    this.px += (tx - this.px) * Math.min(1, 0.06 * k);
+    this.px += (tx - this.px) * Math.min(1, 0.1 * k);
     this.backCanvas.style.transform = 'translate3d(' + this.px.toFixed(2) + 'px,0,0)';
     this.floaters.forEach(function (f) { f.age += k; f.y -= 0.55 * k; f.x += Math.sin(f.age / 24 + f.ph) * 0.45 * k; });
     this.floaters = this.floaters.filter(function (f) { return f.age < 240; });
@@ -388,8 +390,8 @@ document.querySelectorAll('.join').forEach(function (form) {
     this.floaters.forEach(function (f) {
       var alpha = clamp((240 - f.age) / 70);
       ctx.globalAlpha = alpha;
-      ctx.fillStyle = mix(f.navy, f.real, Math.max(self.reveal(f.x, f.y), clamp(f.age / 24))); ctx.beginPath(); ctx.arc(f.x, f.y, 6.5, 0, 6.283); ctx.fill();
-      ctx.globalAlpha = alpha * clamp((f.age - 6) / 22);
+      ctx.fillStyle = mix(f.navy, f.real, Math.max(self.reveal(f.x, f.y), clamp(f.age / 12))); ctx.beginPath(); ctx.arc(f.x, f.y, 6.5, 0, 6.283); ctx.fill();
+      ctx.globalAlpha = alpha * clamp((f.age - 2) / 12);
       ctx.fillStyle = mix('#FFFFFF', f.good ? '#335438' : C.s900, self.reveal(f.x, f.y)); ctx.textAlign = f.side > 0 ? 'left' : 'right';
       ctx.fillText(f.name, f.x + f.side * 13, f.y);
       ctx.globalAlpha = 1;
@@ -436,7 +438,7 @@ document.querySelectorAll('.join').forEach(function (form) {
     return out;
   }
   function storyResize() {
-    var f = fit(sc); S.ctx = f.ctx; S.w = f.w; S.h = f.h; S.fctx = fit(farC).ctx;
+    var f = fit(sc); S.ctx = f.ctx; S.w = f.w; S.h = f.h; S.fctx = fit(farC, 0.5).ctx;
     var gap = Math.min(130, S.w / 8.2), cx = S.w / 2;
     S.gap = gap; S.xs = DAYS.map(function (d, i) { return cx + (i - 3) * gap; });
     S.extra = meadowRow(rng(11), S.w < 600 ? 22 : 30, 0.08, 0.3, function (x) {
